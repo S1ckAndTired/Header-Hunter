@@ -11,7 +11,7 @@ from helpers.court import judger
 
 
 
-def requester(targett,  header, Application_Programming_Interface, current_headers, proxy, wordlist):
+def requester(targett,  header, api, current_headers, proxy, wordlist):
     if header is not None:
         for items in header:
             param_name, param_value = items.split(": ")
@@ -36,7 +36,7 @@ def requester(targett,  header, Application_Programming_Interface, current_heade
             f.write(f"[-] NO REDIRECT - [{r.url}]" + "\n")
             f.close()
         headers = r.headers
-        judger(headers, Application_Programming_Interface, current_headers, targett, url, wordlist)
+        judger(headers, api, current_headers, targett, url, wordlist)
     if wordlist is None:
         if proxy:
             proxy = {"https": proxy}
@@ -48,4 +48,4 @@ def requester(targett,  header, Application_Programming_Interface, current_heade
         else:
             print(f"[-] NO REDIRECT - [{r.url}]")
         headers = r.headers
-        judger(headers, Application_Programming_Interface, current_headers, targett, url, wordlist)
+        judger(headers, api, current_headers, targett, url, wordlist)
