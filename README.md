@@ -2,18 +2,22 @@
 Trying to avoid the fatigue!
 
 
+##### Added a new feature `-api`. 
+##### I still gotta work on the `info disclosure` output because it gets printed whether it does retireve any header or not. 
+
+
 #### Usage
-      ./HeaderHunter.py -h
-      usage: HeaderHunter.py [-h] [-ch] [-o] [-x] (-t  | -w ) [ ...]
+      usage: HeaderHunter.py [-h] [-ch] [-H] [-x] [-api] (-t  | -w ) [ ...]
 
       positional arguments:
-
-
+         
+      
       optional arguments:
         -h, --help        show this help message and exit
         -ch, --cheaders   Fetch current headers
-        -o , --origin     Origin required for API
+        -H , --header     This is self explaining
         -x , --proxy      Proxy - http://IP:PORT
+        -api, --api       Set it for api
         -t , --target 
         -w , --wordlist   Provide list of targets
         
