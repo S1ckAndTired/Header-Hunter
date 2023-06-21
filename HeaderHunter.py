@@ -13,8 +13,8 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("-ch","--cheaders", action="store_true", help="Fetch current headers")
 parser.add_argument("-H", "--header", metavar="", action="append", help="This is self explaining")
-parser.add_argument("-x", "--proxy", metavar="", help="Prxy - http://IP:PORT")
-parser.add_argument("-api", "--Application-Programming-Interface", dest="Application_Programming_Interface", action="store_true", help="Set it for Application_Programming_Interface")
+parser.add_argument("-x", "--proxy", metavar="", help="Proxy - http://IP:PORT")
+parser.add_argument("-api", "--api", action="store_true", help="Set it for api")
 group = parser.add_mutually_exclusive_group(required=True)
 group.add_argument("-t", "--target", metavar="")
 group.add_argument("-w", "--wordlist", metavar="", help="Provide list of targets")
@@ -25,7 +25,7 @@ header = args.header
 wordlist = args.wordlist
 current_headers = args.cheaders
 proxy = args.proxy
-Application_Programming_Interface = args.Application_Programming_Interface
+api = args.api
 
 def start():
     print("\nPowered By: BERGHEM - Smart Information Security")
@@ -41,15 +41,15 @@ def start():
             print("\r    Fetching headers", end=""),bar.next()
             targett = t.strip()
             if current_headers == True:
-                http_builder(targett, header, Application_Programming_Interface, current_headers, proxy, wordlist)
+                http_builder(targett, header, api, current_headers, proxy, wordlist)
             elif current_headers == False:
-                http_builder(targett, header, Application_Programming_Interface, current_headers, proxy, wordlist)
+                http_builder(targett, header, api, current_headers, proxy, wordlist)
         bar.finish()
     elif target:
         targett = target
         if current_headers == True:
-            http_builder(targett,  header, Application_Programming_Interface, current_headers, proxy, wordlist)
+            http_builder(targett,  header, api, current_headers, proxy, wordlist)
         elif current_headers == False:
-            http_builder(targett,  header, Application_Programming_Interface, current_headers, proxy, wordlist)
+            http_builder(targett,  header, api, current_headers, proxy, wordlist)
 
 start()
