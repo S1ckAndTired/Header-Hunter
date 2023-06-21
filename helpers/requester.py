@@ -11,71 +11,41 @@ from helpers.court import judger
 
 
 
-def requester(targett, origin, current_headers, proxy, wordlist):
+def requester(targett,  header, Application_Programming_Interface, current_headers, proxy, wordlist):
+    if header is not None:
+        for items in header:
+            param_name, param_value = items.split(": ")
+            custom_headers[param_name] = param_value
+
     url = targett
     if wordlist is not None:
         if proxy:
             proxy = {"https": proxy}
-        if origin != None:
-            headers = {"Origin": origin}
-            r = requests.get(url, headers=headers, proxies=proxy, verify=False, allow_redirects=True)
+        base_target = (f"[•] BASE TARGET - [{targett}]")
+        r = requests.head(url, proxies=proxy, headers=custom_headers, verify=False, allow_redirects=True)
+        if r.url != targett:
             f = open("output-headers.txt", "a")
             f.write("                              " + "\n")
-            f.write(f"[•] BASE TARGET Y- [{targett}]" + "\n")
-            if r.url != targett:
-                f = open("output-headers.txt", "a")
-                f.write("                              " + "\n")
-                f.write(f"[•] BASE TARGET - [{targett}]" + "\n")
-                f.write(f"[»] REDIRECTION - [{r.url}]" + "\n")
-                f.close()
-            else:
-                f = open("output-headers.txt", "a")
-                f.write("                              " + "\n")
-                f.write(f"[•] BASE TARGET - [{targett}]" + "\n")
-                f.write(f"[-] NO REDIRECT - [{r.url}]" + "\n")
-                f.close()
-            headers = r.headers
-            judger(headers, current_headers, targett, url, wordlist)
-            
-        elif origin == None:
-            base_target = (f"[•] BASE TARGET - [{targett}]")
-            r = requests.get(url, proxies=proxy, verify=False, allow_redirects=True)
-            if r.url != targett:
-                f = open("output-headers.txt", "a")
-                f.write("                              " + "\n")
-                f.write(f"[•] BASE TARGET - [{targett}]" + "\n")
-                f.write(f"[»] REDIRECTION - [{r.url}]" + "\n")
-                f.close()
-            else:
-                f = open("output-headers.txt", "a")
-                f.write("                              " + "\n")
-                f.write(f"[•] BASE TARGET - [{targett}]" + "\n")
-                f.write(f"[-] NO REDIRECT - [{r.url}]" + "\n")
-                f.close()
-            headers = r.headers
-            judger(headers, current_headers, targett, url, wordlist)
+            f.write(f"[•] BASE TARGET - [{targett}]" + "\n")
+            f.write(f"[»] REDIRECTION - [{r.url}]" + "\n")
+            f.close()
+        else:
+            f = open("output-headers.txt", "a")
+            f.write("                              " + "\n")
+            f.write(f"[•] BASE TARGET - [{targett}]" + "\n")
+            f.write(f"[-] NO REDIRECT - [{r.url}]" + "\n")
+            f.close()
+        headers = r.headers
+        judger(headers, Application_Programming_Interface, current_headers, targett, url, wordlist)
     if wordlist is None:
         if proxy:
             proxy = {"https": proxy}
-        if origin != None:
-            print("")
-            print(f"[•] BASE TARGET - [{targett}]")
-            headers = {"Origin": origin}
-            r = requests.get(url, headers=headers, proxies=proxy, verify=False, allow_redirects=True)
-            if r.url != targett:
-                print(f"[»] REDIRECTION - [{r.url}]")
-            else:
-                pass
-            headers = r.headers
-            judger(headers, current_headers, targett, url, wordlist)
-            
-        elif origin == None:
-            print("")
-            print(f"[•] BASE TARGET - [{targett}]")
-            r = requests.get(url, proxies=proxy, verify=False, allow_redirects=True)
-            if r.url != targett:
-                print(f"[»] REDIRECTION - [{r.url}]")
-            else:
-                pass
-            headers = r.headers
-            judger(headers, current_headers, targett, url, wordlist)
+        print("")
+        print(f"[•] BASE TARGET - [{targett}]")
+        r = requests.head(url, proxies=proxy, headers=custom_headers,  verify=False, allow_redirects=True)
+        if r.url != targett:
+            print(f"[»] REDIRECTION - [{r.url}]")
+        else:
+            print(f"[-] NO REDIRECT - [{r.url}]")
+        headers = r.headers
+        judger(headers, Application_Programming_Interface, current_headers, targett, url, wordlist)
