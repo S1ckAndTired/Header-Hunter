@@ -40,8 +40,6 @@ def judger(headers, api, wordlist, output):
                         missing.append(must_have)
                     else:
                         pass
-                for header in headers:
-                        casual_headers.append(header)
                 out(wordlist, output)
             else:
                 for must_have in mind_headers_html:
@@ -49,8 +47,6 @@ def judger(headers, api, wordlist, output):
                         missing.append(must_have)
                     else:
                         pass
-                for header in headers:
-                        casual_headers.append(header)
                 out(wordlist)
         else:
             if not_empty:
@@ -70,8 +66,6 @@ def judger(headers, api, wordlist, output):
                         missing.append(must_have)
                     else:
                         pass
-                for header in headers:
-                        casual_headers.append(header)
                 out(wordlist, output)
             else:
                 for must_have in mind_headers_html:
@@ -79,8 +73,6 @@ def judger(headers, api, wordlist, output):
                         missing.append(must_have)
                     else:
                         pass
-                for header in headers:
-                        casual_headers.append(header)
                 out(wordlist)
     elif wordlist is None:
         print("")        
@@ -99,21 +91,17 @@ def judger(headers, api, wordlist, output):
                 if header.lower() == information.lower():
                     if headers[f"{header}"]:
                         print(Fore.YELLOW+"[!]"+Fore.RESET+f" - {Fore.WHITE+header+Fore.RESET}:",Fore.YELLOW+headers[f"{header}"]+Fore.RESET)    
-        if api is True:
+        if api == True:
             for must_have in mind_headers_api:
                 if must_have not in headers:
                     missing.append(must_have)
                 else:
                     pass
-            for header in headers:
-                    casual_headers.append(header)
-            out(headers, wordlist)
+            out(wordlist, output)
         elif api is False:
             for must_have in mind_headers_html:
                 if must_have not in headers:
                     missing.append(must_have)
                 else:
                     pass
-            for header in headers:
-                    casual_headers.append(header)
             out(wordlist, output)
