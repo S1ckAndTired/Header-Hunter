@@ -30,8 +30,11 @@ wordlist = args.wordlist
 proxy = args.proxy
 api = args.api
 
+
 def start():
-    print(Fore.BLUE +"Powered By: BERGHEM - Smart Information Security"+Fore.RESET)
+    ORANGE = '\33[33m'
+    NC = '\033[0m'
+    print(Fore.BLUE +"Powered By: " + Fore.RESET + ORANGE + "BERGHEM - Smart Information Security" + NC)
     if wordlist:
         if output:
             f = open("output-headers.txt", "a")
