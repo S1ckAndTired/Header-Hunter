@@ -10,6 +10,10 @@ Header hunter is a python script aimed for headers evaluation, whether a certain
 + PROXY - Hardly ever you need this, but if you need just proxy it
 
 ### :gear: Instalation
+      pip3 install virtualenv
+      python3 -m venv <your-virtual-env-name>
+      cd into it
+      clone the repo and...
       pip3 install -r requirements.txt
 
 
